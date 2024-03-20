@@ -27,23 +27,26 @@ class Predict(ctk.CTkFrame):
     def __start_predict(self):
         model = YOLO("best.pt")
         for filename in os.listdir(self.storage_name):
-            if not filename.endswith("png"):
-                continue
-            results = model.predict(source=os.path.join(self.storage_name, filename), verbose=False)
-            conf = results[0].probs.data.tolist()
-            idx = conf.index(max(conf))
+            print(filename)
+            if filename.endswith("png"):
+            #continue
+                results = model.predict(source=os.path.join(self.storage_name, filename), verbose=False)
+                conf = results[0].probs.data.tolist()
+                idx = conf.index(max(conf))
 
-            cv2.imshow("0", cv2.imread(os.path.join(self.storage_name, filename)))
-            print(f'idx = {idx}, filename = {filename}')
-            image = cv2.imread(os.path.join(self.storage_name, filename))
-            image = cv2.putText(image, ["BAD", "GOOD"][bool(idx!=0)],
-                        (100,100),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        fontScale=1,
-                        color=(0, 255, 0),
-                        thickness=2,)
-            # if int(idx) == 1:
-            cv2.imshow("0", image)
+                #cv2.imshow("0", cv2.imread(os.path.join(self.storage_name, filename)))
+                print(f'idx = {idx}, filename = {filename}')
+                image = cv2.imread(os.path.join(self.storage_name, filename))
+                image = cv2.putText(image, ["BAD", "GOOD"][bool(idx!=0)],
+                            (100,100),
+                            cv2.FONT_HERSHEY_SIMPLEX,
+                            fontScale=1,
+                            color=(0, 255, 0),
+                            thickness=2,)
+                # if int(idx) == 1:
+                cv2.imshow("0", image)
 
-            if  cv2.waitKey(0) == 27:
-                break
+                if cv2.waitKey(0) == 27:
+                    cv2.destroyWindow()
+                    break
+        cv2.destroyAllWindows()
