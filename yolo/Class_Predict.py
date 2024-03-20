@@ -6,7 +6,7 @@ import cv2
 class Predict(ctk.CTkFrame):
     def __init__(self, master, title):
         super().__init__(master)
-        self.storage_name = ""
+        self.storage_name: str
         self.grid_columnconfigure(0, weight=1)
        # self.grid_rowconfigure(0, weight=1)
         self.label = ctk.CTkLabel(self, text="Predict", fg_color="blue", text_color="white")
@@ -19,7 +19,7 @@ class Predict(ctk.CTkFrame):
     def __open_file_dialog(self):
         root = ctk.CTk()
         root.withdraw()
-        file_path = ctk.filedialog.askdirectory(title='0?:0 A 87>1@065=8O<8')
+        file_path = ctk.filedialog.askdirectory(title='Choose image dataset')
         if file_path != '':
             root.destroy()
             self.storage_name = file_path
@@ -47,6 +47,5 @@ class Predict(ctk.CTkFrame):
                 cv2.imshow("0", image)
 
                 if cv2.waitKey(0) == 27:
-                    cv2.destroyWindow()
                     break
         cv2.destroyAllWindows()
