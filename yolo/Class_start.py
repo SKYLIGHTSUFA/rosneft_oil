@@ -7,13 +7,13 @@ class Start(customtkinter.CTk):
     def __init__(self):
         super().__init__()
         customtkinter.set_appearance_mode("dark")
-        #self.title(" ($",")
+        self.title("Vattometr app")
         #self.geometry(f"{self.winfo_screenwidth()}x{self.winfo_screenheight()}")
         self.grid_columnconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
         self.grid_rowconfigure(0, weight=1)
 
-        self.predict = Predict(self, title="K1@0BL")
+        self.predict = Predict(self)
         self.predict.grid(row=0, column=0, sticky="nswe", padx=5, pady=5)
         self.dataset = Dataset(self)
         self.dataset.grid(row=0, column=1, sticky="nsew", pady=5)

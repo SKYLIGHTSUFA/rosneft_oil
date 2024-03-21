@@ -4,7 +4,7 @@ from ultralytics import YOLO
 import cv2
 
 class Predict(ctk.CTkFrame):
-    def __init__(self, master, title):
+    def __init__(self, master):
         super().__init__(master)
         self.storage_name: str
         self.grid_columnconfigure(0, weight=1)
@@ -25,7 +25,7 @@ class Predict(ctk.CTkFrame):
             self.storage_name = file_path
             return file_path
     def __start_predict(self):
-        model = YOLO("models/best2_fixed_bugs.pt")
+        model = YOLO("models/best3_all_data_v8s.pt")
         for filename in os.listdir(self.storage_name):
             print(filename)
             if filename.endswith("png"):

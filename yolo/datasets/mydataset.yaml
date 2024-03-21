@@ -1,4 +1,4 @@
-train: train/
+train: train_simple_data/
 valid: valid/
 test: test/
 
