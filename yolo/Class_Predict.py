@@ -25,7 +25,7 @@ class Predict(ctk.CTkFrame):
             self.storage_name = file_path
             return file_path
     def __start_predict(self):
-        model = YOLO("best2.pt")
+        model = YOLO("models/best2_fixed_bugs.pt")
         for filename in os.listdir(self.storage_name):
             print(filename)
             if filename.endswith("png"):

@@ -29,7 +29,7 @@ class Dataset(ctk.CTkFrame):
                                              variable=self.check_var, onvalue="on", offvalue="off")
         self.checkbox.grid(row=3, column=0, pady=5, sticky="ew")
         self.check_var_dot = ctk.StringVar(value="on")
-        self.checkbox_dot = ctk.CTkCheckBox(self, text="Use dot and valuue", command=self.checkbox_event_dot,
+        self.checkbox_dot = ctk.CTkCheckBox(self, text="Use dot and values", command=self.checkbox_event_dot,
                                         variable=self.check_var_dot, onvalue="on", offvalue="off")
         self.checkbox_dot.grid(row=4, column=0, pady=5, sticky="ew")
         self.button_generator_images = ctk.CTkButton(self, text="Start generate image",
@@ -85,12 +85,13 @@ class Dataset(ctk.CTkFrame):
                 # print(count, normalized_data, dots)
                 count += 1
                 # plt.axis([0, 12, 0, 1])
-                plt.axis("off")
+                plt.axis(self.checkbox.get())
                 plt.plot(range(12), normalized_data, linewidth=1, color="black")
-                # plt.plot(range(12), normalized_data, "ro")
-                for index, y in enumerate(normalized_data):
-                    pass
-                    # plt.text(index,y,dots[index])
+
+                if self.checkbox_dot.get() == "on":
+                    plt.plot(range(12), normalized_data, "ro")
+                    for index, y in enumerate(normalized_data):
+                        plt.text(index,y,dots[index])
                 plt.savefig(os.path.join(f'images/Скв_{k}', f'scv_{k}_{count}'), pad_inches=0)
                 plt.clf()
 
