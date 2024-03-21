@@ -46,17 +46,17 @@ class Dataset(ctk.CTkFrame):
         df.drop(["Мест-е"], axis=1, inplace=True, errors="ignore")
         df.drop(["Площадь"], axis=1, inplace=True, errors="ignore")
         df.drop(["mst"], axis=1, inplace=True, errors="ignore")
+        df["p"] = df.apply(lambda x: str(x.p).replace(",", "."), axis=1)
 
         def get_num(x):
             try:
-                if isinstance(x, float):
-                    return x
+                if isinstance(float(x), float):
+                    return round(float(x), 2)
             except:
                 return None
 
         df["p"] = df["p"].apply(lambda x: get_num(x))
-        #print(df['p'].value_counts())
-        df = df.query("p <=0 or p>=0")
+        df.query("p >=-100 and p<=100", inplace=True)
         self.info__values = ctk.CTkLabel(self,
                                          text=f"min = {round(df['p'].min(),2)}, max = {round(df['p'].max(),2)}, mean = {round(df['p'].mean(),2)}")
         self.info__values.grid(row=7, column=0, pady=10, sticky="we")
