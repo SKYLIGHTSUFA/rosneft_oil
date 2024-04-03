@@ -76,6 +76,12 @@ class Dataset(ctk.CTkFrame):
             # if k != 1101:continue
             while 12 * (count + 1) <= len(v):
                 dots = v[count * 12:(count + 1) * 12]
+                flag = False
+                for i in range(11):
+                    if dots[i] == 0 and dots[i+1] == 0:
+                        flag =True
+                if flag:
+                    continue
                 if len(dots) != 12: print(len(dots))
                 if 0.65 < statistics.pstdev(dots) < 0.95: print(k, count + 1)
                 if statistics.pstdev(dots) < 0.65:
